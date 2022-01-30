@@ -19,6 +19,7 @@ public class MessageRestController {
 		String user1 = "Mohit";
 		log.info("Inside MessageController");
 		LocalDateTime ldt = LocalDateTime.now();
+		log.info("Jenkins Test");
 		int hour = ldt.getHour();
 		if (hour < 12)
 			return "Good Morning " + user1;
