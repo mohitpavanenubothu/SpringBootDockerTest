@@ -1,5 +1,5 @@
-FROM openjdk:8
+FROM openjdk:11
 VOLUME /tmp
 EXPOSE 4060
-ADD target/springbootdocker-0.0.1-SNAPSHOT.jar springbootdocker-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","springbootdocker-0.0.1-SNAPSHOT.jar"]
+ADD target/spring-boot-docker.jar spring-boot-docker.jar
+ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
