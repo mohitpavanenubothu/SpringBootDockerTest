@@ -60,7 +60,10 @@ public class StudentServiceImpl implements IStudentService {
 	public List<Student> getAllStudents() {
 		log.info("Inside getAllStudents method of Student Service Class");
 		List<Student> list = repo.findAll();
-		// list.stream().filter(s->s.equals(list)).collect(Collectors.toList());
+		// for each inside lamda
+		list.stream().forEach(s -> System.out.println(s));
+		//Method reference
+		list.stream().forEach(System.out::println);
 		return list;
 	}
 
