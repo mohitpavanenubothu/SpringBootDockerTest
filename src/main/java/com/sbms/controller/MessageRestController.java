@@ -17,8 +17,9 @@ public class MessageRestController {
 
 	@GetMapping("/welcome")
 	public String showMsg() {
+		
 		String user1 = "Mohit";
-		log.info("Inside MessageController");
+		log.info("Inside MessageController for Greeting message");
 		LocalDateTime ldt = LocalDateTime.now();
 		log.info("Jenkins Test");
 		int hour = ldt.getHour();

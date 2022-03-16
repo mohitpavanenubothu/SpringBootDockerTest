@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbms.exception.StudentNotFoundException;
 import com.sbms.model.Student;
 import com.sbms.service.IStudentService;
+import com.sbms.vo.CommanResponse;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,53 +35,48 @@ public class StudentController {
 	// 1.save
 	@PostMapping("/save")
 	@ApiOperation("For Student registration")
-	public ResponseEntity<String> saveStudent(@RequestBody Student student) {
-		try {
-			log.info("Inside saveStudent method of Student Controller");
-			Integer id = service.saveStudent(student);
-			String body = "Student saved with Id" + id;
-			return new ResponseEntity<String>(body, HttpStatus.CREATED);
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.info("Inside saveStudent method problem occured");
-			return new ResponseEntity<String>("Problem in save Student method", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<?> saveStudent(@RequestBody Student student) throws Exception {
+		log.info("Inside saveStudent method of Student Controller");
+		Integer id = service.saveStudent(student);
+		String result = "Student saved with Id" + id;
+		// return ResponseEntity.status(HttpStatus.OK).body(new CommanResponse());
+		return CommanResponse.generateResponse("Successfully Student data inserted", HttpStatus.CREATED, result);
 	}
 
 	// 2.update
 	@PutMapping("/update")
-	public ResponseEntity<String> updateStudent(@RequestBody Student student) {
+	public ResponseEntity<Object> updateStudent(@RequestBody Student student) throws Exception {
 		log.info("Inside updateStudent method of Student Controller");
-		service.updateStudent(student);
+		Integer id = service.updateStudent(student);
+		System.out.println("Update record id is" + id);
 		String body = "Student Updated!" + student.getStdId();
-		return ResponseEntity.ok(body);
+		return CommanResponse.generateResponse("Student data is Updated", HttpStatus.OK, body);
 	}
 
 	// 3.find by did
 	@GetMapping("/find/{id}")
-	public ResponseEntity<Student> fetchOneStudent(@PathVariable Integer id) {
+	public ResponseEntity<Object> fetchOneStudent(@PathVariable Integer id) throws StudentNotFoundException {
 		log.info("Inside fetchOneStudent method of Student Controller");
-		Student s = service.getOneStudent(id);
-		return ResponseEntity.ok(s);
+		Student student = service.getOneStudent(id);
+		return CommanResponse.generateResponse("This StudentId Details is", HttpStatus.OK, student);
 
 	}
 
 	// 4.find all
 	@GetMapping("/allStudents")
-	public ResponseEntity<List<Student>> getAllStudents() {
+	public ResponseEntity<?> getAllStudents() throws StudentNotFoundException {
 		log.info("Inside getAllStudents method of Student Controller");
 		List<Student> list = service.getAllStudents();
-		return ResponseEntity.ok(list);
+		return CommanResponse.generateResponse("All Student Details are", HttpStatus.OK, list);
 	}
 
 	// 5.delete
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteStudent(@PathVariable Integer id) {
+	public ResponseEntity<?> deleteStudent(@PathVariable Integer id) throws StudentNotFoundException {
 		log.info("Inside deleteStudent method of Student Controller");
 		service.deleteStudent(id);
 		String body = "Student deleted succussfully with id::" + id;
-		return ResponseEntity.ok(body);
-
+		return CommanResponse.generateResponse("Tourist Deleted Successfully", HttpStatus.OK, body);
 	}
 
 }

@@ -2,18 +2,24 @@ package com.sbms.service;
 
 import java.util.List;
 
+import com.sbms.exception.StudentNotFoundException;
 import com.sbms.model.Student;
 
 public interface IStudentService {
 
-	public Integer saveStudent(Student s);
+	//1.save
+	public Integer saveStudent(Student s) throws Exception ;
 
-	public void updateStudent(Student s);
+	//2.update
+	public Integer updateStudent(Student s) throws Exception;
 
-	public void deleteStudent(Integer id);
+	//3.Delete
+	public Integer deleteStudent(Integer id) throws StudentNotFoundException;
 
-	public Student getOneStudent(Integer id);
+	//4.Fetch one student
+	public Student getOneStudent(Integer id) throws StudentNotFoundException;
 
-	public List<Student> getAllStudents();
+	//5.All
+	public List<Student> getAllStudents() throws StudentNotFoundException;
 
 }

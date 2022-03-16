@@ -16,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerDocsConfig {
+	
 	@Bean
 	public Docket createDocket() {
 		return new Docket(DocumentationType.SWAGGER_2) // UI screen type
@@ -27,8 +28,8 @@ public class SwaggerDocsConfig {
 	}
 
 	private ApiInfo getApiInfo() {
-		Contact contact = new Contact("mohit", "http://www.HCL.com/student", "mohitenubothu@gmail.com");
-		return new ApiInfo("Tourist API", "Gives Info Tourist Activites", "3.4.RELEASE", "http://www.hcl.com/license",
+		Contact contact = new Contact("Karthik", "https://tirupatibalaji.ap.gov.in/#/login", "mohitenubothu@gmail.com");
+		return new ApiInfo("Pilgrim API", "Gives Info Pilgrim Activites", "3.4.RELEASE", "http://www.hcl.com/license",
 				contact, "GNU Public", "http://apache.org/license/gnu", Collections.emptyList());
 	}
 
