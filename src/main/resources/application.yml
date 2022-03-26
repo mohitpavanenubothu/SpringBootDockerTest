@@ -1,18 +1,12 @@
 server:
   port: 4060
 
-spring:
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1522:xe
-    username: system
-    password: Mohit
-    
-  jpa:
-    database-platform: org.hibernate.dialect.Oracle10gDialect
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  
+spring:  
   application:
-    name: Student-Service
+    name: STUDENT-SERVICE
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
